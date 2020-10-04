@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - 12
+services:
+  - mongodb
+install:
+  - npm install
+  - npm install -g serverless
+script:
+  - npm run test
+
+after_success:
+  - serverless deploy
+
