@@ -1,20 +1,15 @@
-const petsCollection = "pets";
-
-const SINGLE_ENTITY = "contact";
-const COLLECTION_NAME = "contacts";
-const COLLECTION_ID_PARAMETER = `:${SINGLE_ENTITY}`;
+const SINGLE_ENTITY = "pet";
+const COLLECTION_NAME = "pets";
 const COLLECTION_ID = `${SINGLE_ENTITY}_id`
 
 const API_ROUTE = "/api"
 
-const routeWithID = `/${COLLECTION_NAME}/:${COLLECTION_ID_PARAMETER}`;
+const routeWithID = `/${COLLECTION_NAME}/:pet_id`;
 const routeWithoutID = `/${COLLECTION_NAME}`;
 const API_routeWithoutID = API_ROUTE + routeWithoutID;
 const API_routeWithID = API_ROUTE + routeWithoutID;
 
-
 module.exports = {
-  petsCollection,
   routeWithID,
   routeWithoutID,
   SINGLE_ENTITY,

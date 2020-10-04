@@ -1,34 +1,46 @@
-// petModel.js
 var mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 const {
-    petsCollection,
     routeWithID,
     routeWithoutID,
     SINGLE_ENTITY,
-} = require("./constants")
+} = require("./constants");
 
-// Setup schema
+
+// {
+//   "name" :"Bob",
+//   "price": 50,
+//   "breed":"Male"
+// }
+
+
+
+
+// set-up the schema
 var petSchema = mongoose.Schema({
+    _id: Number,
     name: {
         type: String,
         required: true
     },
-    email: {
-        type: String,
+    price: {
+        type: mongoose.Types.Decimal128,
         required: true
     },
-    gender: String,
-    phone: String,
-    create_date: {
-        type: Date,
-        default: Date.now
+    breed: {
+        type: String,
+        required: true
     }
-});
-// Export Contact model
-var Pet = module.exports = mongoose.model(SINGLE_ENTITY, petSchema);
-module.exports.get = function (callback, limit) {
+}, {_id: false});
+
+petSchema.plugin(AutoIncrement);
+
+var Pet = module.exports = mongoose.model("pet", petSchema);
+
+module.exports.get = function(callback, limit) {
     Pet.find(callback).limit(limit);
 }
+
 
 
 // {

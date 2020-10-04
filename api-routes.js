@@ -12,7 +12,6 @@ router.get('/', function (req, res) {
 var petController = require('./petController');
 
 const {
-    petsCollection,
     routeWithID,
     routeWithoutID,
     SINGLE_ENTITY,
