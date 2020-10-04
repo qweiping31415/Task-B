@@ -103,38 +103,21 @@ exports.view = function(req, res) {
 // Handle Updates
 // Handle update contact info
 
+
 exports.update = function (req, res) {
-    Pet.findById(req.params.pet_id, function (err, pet) {
+    Pet.findByIdAndUpdate(req.params.pet_id, req.body, {new: true}, function (err, existingItem) {
         if (err) {
             res.send(err);
             return;
         }
-        try {
-            pet.name = req.body.name ? req.body.name : pet.name;
-            pet.price = req.body.price? req.body.price: pet.price;
-            pet.breed = req.body.breed? req.body.breed: pet.breed;
-            // save the contact and check for errors
-            pet.save(function (err) {
-                if (err) {
-                    res.json(err);
-                    return;
-                }
-                res.json({
-                    message: 'Pet Info updated',
-                    data: pet
-                });
-            });
-        } catch (err) {
-            res.json({
-                status: "Error!",
-                message: err
-            })
-            return;
-        }
+
+        res.json({
+            message: 'Pet Info updated',
+            data: existingItem
+        });
+
     });
 };
-
-
 
 
 // Handle delete contact
@@ -154,8 +137,6 @@ exports.delete = function (req, res) {
         }
     });
 };
-
-
 
 
 function validateNewPet(req) {

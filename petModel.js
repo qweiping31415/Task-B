@@ -41,11 +41,3 @@ module.exports.get = function(callback, limit) {
     Pet.find(callback).limit(limit);
 }
 
-
-
-// {
-//     "name": "John 4",
-//   "gender": "Male",
-//   "email": "john@example.org",
-//   "phone": "12345678"
-// }

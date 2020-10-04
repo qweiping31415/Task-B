@@ -41,7 +41,7 @@ describe("POST /", () => {
 
 describe("GET /", () => {
   // test that it is able to connect and get all Pets
-  it("Should get all Pets from mongoDB atlas", (done) => {
+  it("Should get all Pets from local database", (done) => {
     chai.request(app)
       .get(API_routeWithoutID)
       .end((err, res) => {
