@@ -7,7 +7,7 @@ install:
   - npm install
   - npm install -g serverless
 script:
-  - npm run test
+  - npm test
 
 after_success:
   - serverless deploy

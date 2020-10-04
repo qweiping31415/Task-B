@@ -10,12 +10,20 @@ router.get('/', function (req, res) {
 });
 // Import contact controller
 var contactController = require('./contactController');
+
+const {
+    petsCollection,
+    routeWithID,
+    routeWithoutID,
+} = require("./constants")
+
+
 // Contact routes
-router.route('/contacts')
+router.route(routeWithoutID)
     .get(contactController.index)
     .post(contactController.new);
 
-router.route('/contacts/:contact_id')
+router.route(routeWithID)
     .get(contactController.view)
     .patch(contactController.update)
     .put(contactController.update)
