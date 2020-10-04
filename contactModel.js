@@ -22,3 +22,11 @@ var Contact = module.exports = mongoose.model('contact', contactSchema);
 module.exports.get = function (callback, limit) {
     Contact.find(callback).limit(limit);
 }
+
+
+// {
+//     "name": "John 4",
+//   "gender": "Male",
+//   "email": "john@example.org",
+//   "phone": "12345678"
+// }
