@@ -1,7 +1,14 @@
-// contactModel.js
+// petModel.js
 var mongoose = require('mongoose');
+const {
+    petsCollection,
+    routeWithID,
+    routeWithoutID,
+    SINGLE_ENTITY,
+} = require("./constants")
+
 // Setup schema
-var contactSchema = mongoose.Schema({
+var petSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -18,9 +25,9 @@ var contactSchema = mongoose.Schema({
     }
 });
 // Export Contact model
-var Contact = module.exports = mongoose.model('contact', contactSchema);
+var Pet = module.exports = mongoose.model(SINGLE_ENTITY, petSchema);
 module.exports.get = function (callback, limit) {
-    Contact.find(callback).limit(limit);
+    Pet.find(callback).limit(limit);
 }
 
 

@@ -9,25 +9,27 @@ router.get('/', function (req, res) {
     });
 });
 // Import contact controller
-var contactController = require('./contactController');
+var petController = require('./petController');
 
 const {
     petsCollection,
     routeWithID,
     routeWithoutID,
-} = require("./constants")
+    SINGLE_ENTITY,
+    COLLECTION_ID
+} = require("./constants");
 
 
 // Contact routes
 router.route(routeWithoutID)
-    .get(contactController.index)
-    .post(contactController.new);
+    .get(petController.index)
+    .post(petController.new);
 
 router.route(routeWithID)
-    .get(contactController.view)
-    .patch(contactController.update)
-    .put(contactController.update)
-    .delete(contactController.delete);
+    .get(petController.view)
+    .patch(petController.update)
+    .put(petController.update)
+    .delete(petController.delete);
 
 
 // Export API routes

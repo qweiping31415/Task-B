@@ -1,9 +1,17 @@
-// contactController.js
+// petController.js
 // Import contact model
-Contact = require('./contactModel');
+Pet = require('./petModel');
 // Handle index actions
+const {
+    petsCollection,
+    routeWithID,
+    routeWithoutID,
+    SINGLE_ENTITY,
+    COLLECTION_ID
+} = require("./constants");
+
 exports.index = function (req, res) {
-    Contact.get(function (err, contacts) {
+    Pet.get(function (err, pets) {
         if (err) {
             res.json({
                 status: "error",
@@ -12,44 +20,44 @@ exports.index = function (req, res) {
         }
         res.json({
             status: "success",
-            message: "Contacts retrieved successfully",
-            data: contacts
+            message: "Pets retrieved successfully",
+            data: pets
         });
     });
 };
 // Handle create contact actions
 exports.new = function (req, res) {
-    var contact = new Contact();
-    contact.name = req.body.name ? req.body.name : contact.name;
-    contact.gender = req.body.gender;
-    contact.email = req.body.email;
-    contact.phone = req.body.phone;
+    var pet = new Pet();
+    pet.name = req.body.name ? req.body.name : pet.name;
+    pet.gender = req.body.gender;
+    pet.email = req.body.email;
+    pet.phone = req.body.phone;
 // save the contact and check for errors
-    contact.save(function (err) {
+    pet.save(function (err) {
         // Check for validation error
         if (err)
             res.json(err);
         else
             res.json({
-                message: 'New contact created!',
-                data: contact
+                message: `New ${SINGLE_ENTITY} created!`,
+                data: pet
             });
     });
 };
 // Handle view contact info
 exports.view = function (req, res) {
-    Contact.findById(req.params.contact_id, function (err, contact) {
+    Pet.findById(req.params[COLLECTION_ID], function (err, contact) {
         if (err)
             res.send(err);
         res.json({
-            message: 'Contact details loading..',
+            message: 'Pet details loading..',
             data: contact
         });
     });
 };
 // Handle update contact info
 exports.update = function (req, res) {
-    Contact.findById(req.params.contact_id, function (err, contact) {
+    Pet.findById(req.params[COLLECTION_ID], function (err, contact) {
         if (err)
             res.send(err);
         contact.name = req.body.name ? req.body.name : contact.name;
@@ -61,7 +69,7 @@ exports.update = function (req, res) {
             if (err)
                 res.json(err);
             res.json({
-                message: 'Contact Info updated',
+                message: 'Pet Info updated',
                 data: contact
             });
         });
@@ -69,14 +77,14 @@ exports.update = function (req, res) {
 };
 // Handle delete contact
 exports.delete = function (req, res) {
-    Contact.remove({
-        _id: req.params.contact_id
+    Pet.remove({
+        _id: req.params[COLLECTION_ID]
     }, function (err, contact) {
         if (err)
             res.send(err);
         res.json({
             status: "success",
-            message: 'Contact deleted'
+            message: 'Pet deleted'
         });
     });
 };
